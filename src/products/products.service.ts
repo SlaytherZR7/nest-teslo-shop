@@ -31,7 +31,11 @@ export class ProductsService {
   }
 
   findAll() {
-    return `This action returns all products`;
+    try {
+      return this.productRepository.find();
+    } catch (error) {
+      this.handleDBException(error);
+    }
   }
 
   findOne(id: number) {
