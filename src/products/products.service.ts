@@ -133,4 +133,13 @@ export class ProductsService {
     this.logger.error(error.message);
     throw new InternalServerErrorException('Error creating product');
   }
+
+  async deletaAllProducts() {
+    const query = this.productRepository.createQueryBuilder('product');
+    try {
+      return await query.delete().where({}).execute();
+    } catch (error) {
+      this.handleDBException(error);
+    }
+  }
 }
